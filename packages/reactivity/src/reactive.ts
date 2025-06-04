@@ -91,6 +91,7 @@ export type Reactive<T> = UnwrapNestedRefs<T> &
 export function reactive<T extends object>(target: T): Reactive<T>
 export function reactive(target: object) {
   // if trying to observe a readonly proxy, return the readonly version.
+  // 如果尝试观察一个只读的代理，那么返回只读的版本
   if (isReadonly(target)) {
     return target
   }
@@ -323,12 +324,17 @@ export function isReactive(value: unknown): boolean {
 }
 
 /**
- * Checks whether the passed value is a readonly object. The properties of a
- * readonly object can change, but they can't be assigned directly via the
+ * Checks whether the passed value is a readonly object.
+ * 检查传入的值是否为只读对象.
+ *
+ * The properties of a readonly object can change, but they can't be assigned directly via the
  * passed object.
+ *  一个只读的对象的属性是可以改变，但是它们不能通过传入的对象直接对其赋值.
  *
  * The proxies created by {@link readonly} and {@link shallowReadonly} are
  * both considered readonly, as is a computed ref without a set function.
+ * 使用 readonly 和 shallowReadonly 创建的代理对象，都被视作只读的，还有一种特殊情况，就
+ * 是 不带 set 属性的 compute Ref.
  *
  * @param value - The value to check.
  * @see {@link https://vuejs.org/api/reactivity-utilities.html#isreadonly}
@@ -354,6 +360,7 @@ export function isProxy(value: any): boolean {
 
 /**
  * Returns the raw, original object of a Vue-created proxy.
+ * 返回由 Vue 创建的代理对应的原始未处理的对象.
  *
  * `toRaw()` can return the original object from proxies created by
  * {@link reactive}, {@link readonly}, {@link shallowReactive} or
