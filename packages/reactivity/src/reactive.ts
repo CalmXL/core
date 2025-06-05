@@ -95,6 +95,7 @@ export function reactive(target: object) {
   if (isReadonly(target)) {
     return target
   }
+
   return createReactiveObject(
     target,
     false,
@@ -273,7 +274,9 @@ function createReactiveObject(
     return target
   }
   // target is already a Proxy, return it.
+  // 目标已经是一个代理了，返回它
   // exception: calling readonly() on a reactive object
+  // 例外: 对一个响应式对象调用 readonly
   if (
     target[ReactiveFlags.RAW] &&
     !(isReadonly && target[ReactiveFlags.IS_REACTIVE])
@@ -365,6 +368,7 @@ export function isProxy(value: any): boolean {
  * `toRaw()` can return the original object from proxies created by
  * {@link reactive}, {@link readonly}, {@link shallowReactive} or
  * {@link shallowReadonly}.
+ * toRaw() 能够返回通过 reactive, readonly,shallowReactive, shallowReadonly 代理过的原始对象。
  *
  * This is an escape hatch that can be used to temporarily read without
  * incurring proxy access / tracking overhead or write without triggering
