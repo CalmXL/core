@@ -78,7 +78,9 @@ class BaseReactiveHandler implements ProxyHandler<Target> {
               : reactiveMap
           ).get(target) ||
         // receiver is not the reactive proxy, but has the same prototype
+        // receiver 不是响应式代理，但是具有相同的原型
         // this means the receiver is a user proxy of the reactive proxy
+        // 这意味着 receiver 是一个响应式的用户代理
         Object.getPrototypeOf(target) === Object.getPrototypeOf(receiver)
       ) {
         return target

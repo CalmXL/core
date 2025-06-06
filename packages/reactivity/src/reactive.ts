@@ -277,6 +277,7 @@ function createReactiveObject(
   // 目标已经是一个代理了，返回它
   // exception: calling readonly() on a reactive object
   // 例外: 对一个响应式对象调用 readonly
+  // 例外: 对一个响应式对象调用 readonly
   if (
     target[ReactiveFlags.RAW] &&
     !(isReadonly && target[ReactiveFlags.IS_REACTIVE])
@@ -284,11 +285,14 @@ function createReactiveObject(
     return target
   }
   // only specific value types can be observed.
+  // 只能观察特定的类型
   const targetType = getTargetType(target)
   if (targetType === TargetType.INVALID) {
     return target
   }
+
   // target already has corresponding Proxy
+  // 目标已经有相关的代理
   const existingProxy = proxyMap.get(target)
   if (existingProxy) {
     return existingProxy
