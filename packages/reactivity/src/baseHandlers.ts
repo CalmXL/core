@@ -25,6 +25,7 @@ import {
 import { isRef } from './ref'
 import { warn } from './warning'
 
+// 不可追踪的keys
 const isNonTrackableKeys = /*@__PURE__*/ makeMap(`__proto__,__v_isRef,__isVue`)
 
 const builtInSymbols = new Set(
@@ -57,6 +58,8 @@ class BaseReactiveHandler implements ProxyHandler<Target> {
 
     const isReadonly = this._isReadonly,
       isShallow = this._isShallow
+
+    // 对象的响应式代理类型的划分
     if (key === ReactiveFlags.IS_REACTIVE) {
       return !isReadonly
     } else if (key === ReactiveFlags.IS_READONLY) {

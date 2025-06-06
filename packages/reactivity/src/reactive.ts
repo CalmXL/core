@@ -304,6 +304,7 @@ function createReactiveObject(
 /**
  * Checks if an object is a proxy created by {@link reactive} or
  * {@link shallowReactive} (or {@link ref} in some cases).
+ * 检测一个对象是否通过 reactive 或 shallowReactive 或者 某些情况下通过ref.
  *
  * @example
  * ```js

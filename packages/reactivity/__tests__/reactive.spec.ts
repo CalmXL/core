@@ -16,6 +16,7 @@ import { effect } from '../src/effect'
 import { targetMap } from '../src/dep'
 
 describe('reactivity/reactive', () => {
+  // DONE: 测试已跑通
   test('Object', () => {
     const original = { foo: 1 }
     const observed = reactive(original)
@@ -30,18 +31,23 @@ describe('reactivity/reactive', () => {
     expect(Object.keys(observed)).toEqual(['foo'])
   })
 
+  // DONE: 测试已跑通
   test('proto', () => {
     const obj = {}
     const reactiveObj = reactive(obj)
     expect(isReactive(reactiveObj)).toBe(true)
     // read prop of reactiveObject will cause reactiveObj[prop] to be reactive
+    // 读取响应式对象的属性将导致 reactiveObj[prop]将会变成响应式
     // @ts-expect-error
     const prototype = reactiveObj['__proto__']
+    // 访问 __proto__ 本身并不会使原型对象变为响应式，因为 Vue 的响应式不会追踪原型链。
+    expect(isReactive(prototype)).toBe(false)
     const otherObj = { data: ['a'] }
     expect(isReactive(otherObj)).toBe(false)
     const reactiveOther = reactive(otherObj)
     expect(isReactive(reactiveOther)).toBe(true)
     expect(reactiveOther.data[0]).toBe('a')
+    expect(isReactive(reactiveOther.data)).toBe(true)
   })
 
   test('nested reactives', () => {
