@@ -377,8 +377,13 @@ export function isProxy(value: any): boolean {
  *
  * This is an escape hatch that can be used to temporarily read without
  * incurring proxy access / tracking overhead or write without triggering
- * changes. It is **not** recommended to hold a persistent reference to the
+ * changes.
+ * 这是一个紧急出口通道，能够被暂时进行读取操作而不会导致 proxy 的访问或依赖追踪开销。
+ *
+ * It is **not** recommended to hold a persistent reference to the
  * original object. Use with caution.
+ * 不推荐长期持有原始对象的引用，使用时请谨慎。
+ *
  *
  * @example
  * ```js

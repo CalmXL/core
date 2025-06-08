@@ -50,6 +50,7 @@ describe('reactivity/reactive', () => {
     expect(isReactive(reactiveOther.data)).toBe(true)
   })
 
+  // DONE: 测试已跑通
   test('nested reactives', () => {
     const original = {
       nested: {
@@ -118,6 +119,7 @@ describe('reactivity/reactive', () => {
     expect(dummy).toBe(false)
   })
 
+  // 观察值应将对其修改传递到原始对象上。
   test('observed value should proxy mutations to original (Object)', () => {
     const original: any = { foo: 1 }
     const observed = reactive(original)
@@ -131,6 +133,7 @@ describe('reactivity/reactive', () => {
     expect('foo' in original).toBe(false)
   })
 
+  // 原有对象的值改变将会反射在观察的值对象上.
   test('original value change should reflect in observed value (Object)', () => {
     const original: any = { foo: 1 }
     const observed = reactive(original)

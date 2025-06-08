@@ -107,6 +107,8 @@ class BaseReactiveHandler implements ProxyHandler<Target> {
       // if this is a proxy wrapping a ref, return methods using the raw ref
       // as receiver so that we don't have to call `toRaw` on the ref in all
       // its class methods
+      // 如果这是一个包装了 ref 的代理对象，则返回方法使用原始的 ref 作为接受者，这样我们就
+      // 不需要再所有类方法中都调用 toRaw 来获取原始对象.
       isRef(target) ? target : receiver,
     )
 
@@ -179,6 +181,7 @@ class MutableReactiveHandler extends BaseReactiveHandler {
       isRef(target) ? target : receiver,
     )
     // don't trigger if target is something up in the prototype chain of original
+    // 如果目标是原始对象原型链上的某个对象，则不会触发。
     if (target === toRaw(receiver)) {
       if (!hadKey) {
         trigger(target, TriggerOpTypes.ADD, key, value)
