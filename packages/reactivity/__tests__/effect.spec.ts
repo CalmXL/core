@@ -30,12 +30,14 @@ import {
 } from '../src/effect'
 
 describe('reactivity/effect', () => {
+  // DONE: 被 effect 包裹的函数，应该运行传入的函数一次
   it('should run the passed function once (wrapped by a effect)', () => {
     const fnSpy = vi.fn(() => {})
     effect(fnSpy)
     expect(fnSpy).toHaveBeenCalledTimes(1)
   })
 
+  // 应该观察基本的属性
   it('should observe basic properties', () => {
     let dummy
     const counter = reactive({ num: 0 })
