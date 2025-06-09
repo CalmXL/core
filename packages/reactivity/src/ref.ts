@@ -48,6 +48,7 @@ export function isRef(r: any): r is Ref {
 /**
  * Takes an inner value and returns a reactive and mutable ref object, which
  * has a single property `.value` that points to the inner value.
+ * 接收一个内部值，并返回一个响应式且可变的对象，该对象有一个 .value 的属性，它指向这个内部的值。
  *
  * @param value - The object to wrap in the ref.
  * @see {@link https://vuejs.org/api/reactivity-core.html#ref}

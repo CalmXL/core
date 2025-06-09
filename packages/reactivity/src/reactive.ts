@@ -406,6 +406,7 @@ export type Raw<T> = T & { [RawSymbol]?: true }
 /**
  * Marks an object so that it will never be converted to a proxy. Returns the
  * object itself.
+ * 标记一个对象以便于它将不能够被代理。返回对象自己。
  *
  * @example
  * ```js
@@ -421,6 +422,8 @@ export type Raw<T> = T & { [RawSymbol]?: true }
  * {@link shallowReactive} allow you to selectively opt-out of the default
  * deep reactive/readonly conversion and embed raw, non-proxied objects in your
  * state graph.
+ * 警告: markRaw() 与例如 shallowReactive 等浅层 API 一起受用，允许你能有选择的退出默认的
+ * 深度反应式/只读转换，并在你的状态图中嵌入无响应的对象。
  *
  * @param value - The object to be marked as "raw".
  * @see {@link https://vuejs.org/api/reactivity-advanced.html#markraw}
@@ -434,9 +437,9 @@ export function markRaw<T extends object>(value: T): Raw<T> {
 
 /**
  * Returns a reactive proxy of the given value (if possible).
- *
+ * 如果可能的话，返回给定的值的响应式代理。
  * If the given value is not an object, the original value itself is returned.
- *
+ * 如果给定的值不是一个对象，原始的值自己被返回
  * @param value - The value for which a reactive proxy shall be created.
  */
 export const toReactive = <T extends unknown>(value: T): T =>
@@ -444,8 +447,9 @@ export const toReactive = <T extends unknown>(value: T): T =>
 
 /**
  * Returns a readonly proxy of the given value (if possible).
- *
+ * 如果可能的话，返回给定值的一个只读代理。
  * If the given value is not an object, the original value itself is returned.
+ * 如果给定的值不是一个对象，返回原始对象自己。
  *
  * @param value - The value for which a readonly proxy shall be created.
  */
